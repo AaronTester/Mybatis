@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserMapper">
+
+    <resultMap id="userResultMap" type="user">
+        <result column="id" property="id"/>
+        <result column="userId" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="password" property="pwd"/>
+        <result column="groupId" property="groupId"/>
+        <result column="telphone" property="telphone"/>
+        <result column="station" property="station"/>
+    </resultMap>
+
+    <select id="queryUserList" resultType="user">
+        select * from User
+    </select>
+
+    <select id="queryUserById" parameterType="int" resultMap="userResultMap">
+        select * from User where id = #{id}
+    </select>
+
+    <select id="queryUserLike" parameterType="map" resultType="user">
+        select * from User where user_name like #{username}
+    </select>
+
+    <insert id="addUser" parameterType="map" >
+        insert into user(id,userId,user_name,password,groupId,telphone,station)
+        values (#{id},#{userid},#{username},#{password},#{groupId},#{phone},#{station})
+    </insert>
+
+    <delete id="deleteUser" parameterType="int" >
+        delete from User where id = #{id}
+    </delete>
+
+    <update id="updateUser" parameterType="map" >
+        update User set user_name = #{username} where id = #{id}
+    </update>
+
+    <select id="queryUserLimit" resultMap="userResultMap" parameterType="map">
+        select * from User limit #{startIndex},#{pageSize}
+    </select>
+</mapper>

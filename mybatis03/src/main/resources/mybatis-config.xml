@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--数据库配置文件-->
+    <properties resource="db.properties"/>
+
+    <!--查询配置-->
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <!--别名配置-->
+    <typeAliases>
+        <package name="com.mb.entiry"/>
+        <!--<typeAlias type="Teacherteacher"/>
+        <typeAlias type="Studentstudent"/>-->
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <package name="com.mb.mapper"/>
+        <!--<mapper resource="com/mb/mapper/TeacherMapper.xml"/>
+        <mapper resource="com/mb/mapper/StudentMapper.xml"/>-->
+    </mappers>
+</configuration>
